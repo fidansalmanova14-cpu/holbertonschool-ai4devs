@@ -1,52 +1,27 @@
-Təqdim etdiyiniz kod nümunələrindəki xətaları analiz edərək, onları kateqoriyalara ayıran və izah edən bug_descriptions.md faylını aşağıda hazırladım.
+Bug 1 – apply_discount (Python)
+Intended Behavior: Calculate the discount amount based on a percentage and subtract it from the original price to return the correct final price.
 
-🐛 Proqramlaşdırma Xətalarının Təsviri (Bug Descriptions)
-Bu sənəd təqdim olunan kod nümunələrindəki məntiqi, sintaksis və icra zamanı (runtime) xətalarını sənədləşdirir.
+Issue Type: Logical Error.
 
-1. Məntiqi Xəta (Python - Alış-veriş Sistemi)
-Fayl: discount_system.py
+Notes: The code calculates the discount_amount correctly but fails to use it. Instead, it subtracts the raw percentage value (e.g., subtracting 10 from 1200 instead of 120).
 
-Xəta Növü: Logical Error (Məntiqi xəta).
+Bug 2 – displayUserBios (JavaScript)
+Intended Behavior: Iterate through a list of users and print their biographies, safely handling cases where a profile or bio might be missing.
 
-Təsviri: apply_discount funksiyası riyazi olaraq yanlış işləyir. Hesablanmış discount_amount dəyişəni kənarda qalır və proqram price-dan endirim məbləğini deyil, faiz dərəcəsinin özünü çıxır.
+Issue Type: Runtime Error (TypeError).
 
-Nəticə: Məsələn, $1200-dan 10% çıxmaq əvəzinə, sadəcə 10 çıxılır (Nəticə: $1190).
+Notes: The code attempts to access user.profile.bio directly. Since some users have a null profile or no profile at all, the program crashes when trying to read a property of null or undefined.
 
-Həlli: final_price = price - discount_amount olaraq düzəldilməlidir.
+Bug 3 – system_diagnostic_report (Python)
+Intended Behavior: Identify the operating system and print the CPU count using proper Python syntax and structure.
 
-2. İcra Zamanı Xətası (JavaScript - İstifadəçi Profilləri)
-Fayl: user_profiles.js
+Issue Type: Syntax Error / Indentation Error.
 
-Xəta Növü: Runtime Error (TypeError).
+Notes: The script is missing colons (:) at the end of the if and else statements. Additionally, the indentation for the print statements is inconsistent, which prevents the code from executing.
 
-Təsviri: Proqram mövcud olmayan və ya null olan obyektin xüsusiyyətinə (bio) müraciət etməyə çalışır. Bob üçün profile null-dur, Charlie üçün isə profile ümumiyyətlə təyin edilməyib.
+Bug 4 – main.c (C)
+Intended Behavior: Loop through a 5-element array to print each score and calculate the total sum.
 
-Nəticə: Cannot read properties of undefined/null (reading 'bio') xətası ilə proqram çökür.
+Issue Type: Out-of-bounds Error (Buffer Overflow/Off-by-one).
 
-Həlli: Optional Chaining (user.profile?.bio) və ya null yoxlaması əlavə edilməlidir.
-
-3. Sintaksis Xəta (Python - Sistem Diaqnostikası)
-Fayl: diagnostics.py
-
-Xəta Növü: SyntaxError & IndentationError.
-
-Təsviri:
-
-if və else ifadələrinin sonunda qoşa nöqtə (:) unudulub.
-
-if blokundan sonrakı kod düzgün daxilə çəkilməyib (indentation).
-
-Nəticə: Kod icra olunmur, Python interpretatoru dərhal xəta verir.
-
-Həlli: Blok sonlarına : əlavə edilməli və tabulyasiya boşluqları düzəldilməlidir.
-
-4. Yaddaş və İndeks Xətası (C - Qiymətləndirmə Sistemi)
-Fayl: scores.c
-
-Xəta Növü: Off-by-one Error (Buffer Overflow/Out of bounds).
-
-Təsviri: for döngüsündəki şərt i <= num_elements kimidir. 5 elementli massivdə indekslər 0, 1, 2, 3, 4-dür. Döngü 5-ci indeksə müraciət etdikdə massiv sərhədlərini aşır.
-
-Nəticə: Proqram yaddaşdan təsadüfi bir dəyər ("garbage value") oxuyur və ya "Segmentation Fault" xətası ilə dayanır.
-
-Həlli: Döngü şərti i < num_elements olaraq dəyişdirilməlidir.
+Notes: The loop condition i <= num_elements causes the program to access scores[5]. Since C arrays are zero-indexed, a 5-element array only has indices 0 through 4. This results in reading "garbage" data from memory or a program crash.
