@@ -1,17 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
-    char destination[50]; // Fixed: Increased buffer size to accommodate the message
-    char *source = "This is a very long string that is now safe";
+/*
+ * Task: Safe string copying.
+ * Fixed Version: Prevents buffer overflow.
+ */
 
-    // Fixed: Using safer copy and checking size
+int main() {
+    char destination[50]; // Increased buffer size
+    const char *source = "This string is now safely stored";
+
+    printf("Source: %s\n", source);
+
+    // Fixed: Checking bounds before copying
     if (strlen(source) < sizeof(destination)) {
         strcpy(destination, source);
-        printf("Result: %s\n", destination);
+        printf("Success! Result: %s\n", destination);
     } else {
-        printf("Error: Buffer too small\n");
+        fprintf(stderr, "Error: Buffer overflow prevented!\n");
+        return 1;
     }
-    
+
     return 0;
 }

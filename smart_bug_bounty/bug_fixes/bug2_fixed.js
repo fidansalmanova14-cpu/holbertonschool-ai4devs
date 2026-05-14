@@ -1,11 +1,20 @@
-function delayedNumbers() {
-    console.log("Starting countdown...");
+/**
+ * Task: Print numbers 0 to 2 with a delay.
+ * Fixed Version: Uses 'let' for block-level scoping.
+ */
 
-    // Fixed: Changed 'var' to 'let' to ensure block scoping for each iteration
+function delayedNumbers() {
+    console.log("Starting countdown with fixed scoping...");
+
+    // Fixed: 'let' creates a new binding for each iteration
     for (let i = 0; i < 3; i++) {
         setTimeout(function() {
-            console.log("Number: " + i);
+            console.log("Fixed Output - Number: " + i);
         }, 500);
     }
+
+    console.log("Timers scheduled successfully.");
 }
+
+// Execution
 delayedNumbers();

@@ -2,20 +2,20 @@
 
 ## bug1.py
 - **Original Issue**: Off-by-one error in slicing.
-- **Fix Applied**: Replaced complex index calculation with clean Pythonic `items[-n:]`.
-- **Test Results**: Input [1,2,3,4,5], n=2 -> Output [4,5]. **Status: PASSED**
+- **Fix Applied**: Implemented negative slicing `items[-n:]`.
+- **Validation**: Verified with unit tests; returns expected list segments.
 
 ## bug2.js
-- **Original Issue**: Function-scoped variable 'var' caused closure bugs.
-- **Fix Applied**: Used block-scoped `let` in the loop.
-- **Test Results**: Console correctly logs 0, 1, 2 sequentially. **Status: PASSED**
+- **Original Issue**: 'var' keyword caused closure bugs in loop.
+- **Fix Applied**: Switched to `let` to ensure block scope.
+- **Validation**: Console logs 0, 1, 2 as intended after delay.
 
 ## bug3.py
-- **Original Issue**: Mutable default argument caused data persistence.
-- **Fix Applied**: Default value changed to `None`.
-- **Test Results**: Independent calls now create independent lists. **Status: PASSED**
+- **Original Issue**: Shared state via mutable default arguments.
+- **Fix Applied**: Set default to `None` and initialized locally.
+- **Validation**: Independent function calls no longer share data.
 
 ## bug4.c
 - **Original Issue**: Buffer overflow with `strcpy`.
-- **Fix Applied**: Increased destination buffer size and added safety checks.
-- **Test Results**: Program runs without segmentation fault. **Status: PASSED**
+- **Fix Applied**: Increased buffer capacity and added `strlen` check.
+- **Validation**: Program executes without memory corruption.

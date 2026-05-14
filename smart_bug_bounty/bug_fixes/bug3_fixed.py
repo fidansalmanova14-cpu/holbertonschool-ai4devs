@@ -1,10 +1,19 @@
+"""
+Task: Manage a list of students.
+Fixed Version: Avoids mutable default arguments.
+"""
+
 def add_student(name, student_list=None):
-    # Fixed: Using None as default and initializing list inside to avoid shared state
+    # Fixed: Default is None, list is initialized inside
     if student_list is None:
         student_list = []
     
     student_list.append(name)
+    print(f"Added {name}. Current List: {student_list}")
     return student_list
 
-print("Class A:", add_student("Alice"))
-print("Class B:", add_student("Charlie")) # Now correctly returns only ['Charlie']
+# Verification calls
+class_a = add_student("Alice")
+class_a = add_student("Bob")
+# This will now correctly start with an empty list
+class_b = add_student("Charlie") 
