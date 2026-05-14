@@ -11,17 +11,33 @@
         "parameters": [
           { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 } }
         ],
-        "responses": { "200": { "description": "Successful" } }
+        "responses": {
+          "200": { "description": "Successful" },
+          "401": { "description": "Unauthorized" }
+        }
       },
       "post": {
         "summary": "Create device",
-        "responses": { "201": { "description": "Created" } }
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/devices/{id}": {
-      "get": { "summary": "Get device", "responses": { "200": { "description": "OK" } } },
-      "put": { "summary": "Update device", "responses": { "200": { "description": "Updated" } } },
-      "delete": { "summary": "Delete device", "responses": { "204": { "description": "Deleted" } } }
+      "get": { 
+        "summary": "Get device", 
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" } } 
+      },
+      "put": { 
+        "summary": "Update device", 
+        "responses": { "200": { "description": "Updated" }, "404": { "description": "Not Found" } } 
+      },
+      "delete": { 
+        "summary": "Delete device", 
+        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } } 
+      }
     }
   },
   "components": {

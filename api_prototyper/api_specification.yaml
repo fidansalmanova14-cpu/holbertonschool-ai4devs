@@ -1,10 +1,8 @@
 openapi: 3.0.3
 info:
   title: Network Device Inventory API
-  description: API for managing network assets including routers, switches, and firewalls.
   version: 1.0.0
-servers:
-  - url: https://api.network-inventory.com/v1
+  description: API for managing network assets with full error handling and JWT security.
 components:
   securitySchemes:
     bearerAuth:
@@ -12,19 +10,6 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
-    Device:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        hostname:
-          type: string
-        ip_address:
-          type: string
-        status:
-          type: string
-          enum: [online, offline, maintenance, decommissioned]
     Error:
       type: object
       properties:
@@ -44,34 +29,29 @@ paths:
           schema:
             type: integer
             default: 10
-        - name: offset
-          in: query
-          schema:
-            type: integer
-            default: 0
       responses:
         '200':
-          description: A list of devices
+          description: Successful response
+        '401':
+          description: Unauthorized - JWT token missing or invalid
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Device'
+                $ref: '#/components/schemas/Error'
     post:
-      summary: Create a new device
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Device'
+      summary: Create device
       responses:
         '201':
-          description: Device created
+          description: Created
+        '400':
+          description: Bad Request - Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /devices/{id}:
     get:
-      summary: Get device by ID
+      summary: Get device
       parameters:
         - name: id
           in: path
@@ -80,11 +60,15 @@ paths:
             type: string
       responses:
         '200':
-          description: Device details
+          description: OK
         '404':
           description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     put:
-      summary: Update device details
+      summary: Update device
       parameters:
         - name: id
           in: path
@@ -94,8 +78,10 @@ paths:
       responses:
         '200':
           description: Updated
+        '404':
+          description: Device not found
     delete:
-      summary: Delete a device
+      summary: Delete device
       parameters:
         - name: id
           in: path
@@ -105,3 +91,5 @@ paths:
       responses:
         '204':
           description: Deleted
+        '404':
+          description: Device not found
