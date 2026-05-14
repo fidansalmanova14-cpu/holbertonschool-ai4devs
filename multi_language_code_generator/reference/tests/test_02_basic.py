@@ -1,6 +1,6 @@
 import unittest
 from reference.processor import TransactionProcessor
-class TestBasic(unittest.TestCase):
+class Test02(unittest.TestCase):
     def test_run(self):
         res = TransactionProcessor().process([{"id": 1, "amount": 100.0, "category": "Food"}])
         self.assertEqual(res["total_balance"], 100.0)
