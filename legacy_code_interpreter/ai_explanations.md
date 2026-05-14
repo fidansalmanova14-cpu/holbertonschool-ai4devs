@@ -1,7 +1,7 @@
 # AI Explanations of Complex Code: Legacy jQuery Analysis
 
 ## Introduction
-This document provides a detailed breakdown of complex logic within the legacy jQuery (v1.x) codebase. By using AI-assisted analysis, we identify technical debt, architectural patterns, and potential paths for modernization.
+This document provides a detailed breakdown of complex logic within the legacy jQuery (v1.x) codebase. By using AI-assisted analysis, we identify technical debt, architectural patterns, and potential paths for modernization to improve overall system maintainability.
 
 ---
 
@@ -40,7 +40,7 @@ This document provides a detailed breakdown of complex logic within the legacy j
 ## 5. Ready State Logic (DOMContentLoaded)
 - **Plain English**: This complex logic ensures that code inside `$(document).ready()` only executes after the entire DOM is parsed, handling inconsistencies across legacy browsers.
 - **Pattern**: Promise-like state management using internal flags and polling.
-- **Issues**: It uses redundant fallbacks (scroll checks, iframe hacks) that are no longer necessary.
+- **Issues**: It uses redundant fallbacks (scroll checks, iframe hacks) that are no longer necessary in standard environments.
 - **Improvements**: Replace with the standard `DOMContentLoaded` event listener supported by all modern browsers.
 
 ---
