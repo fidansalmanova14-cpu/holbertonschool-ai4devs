@@ -1,0 +1,32 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Network Device Inventory API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/devices": {
+      "get": {
+        "summary": "List all devices",
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 } }
+        ],
+        "responses": { "200": { "description": "Successful" } }
+      },
+      "post": {
+        "summary": "Create device",
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/devices/{id}": {
+      "get": { "summary": "Get device", "responses": { "200": { "description": "OK" } } },
+      "put": { "summary": "Update device", "responses": { "200": { "description": "Updated" } } },
+      "delete": { "summary": "Delete device", "responses": { "204": { "description": "Deleted" } } }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
+    }
+  }
+}
