@@ -1,6 +1,3 @@
-def add_item(item, box=[]):
-    box.append(item)
-    return box
-
-print(add_item("apple"))
-print(add_item("banana")) # Səhv: Köhnə siyahını saxlayır
+def add_to_list(val, my_list=[]):
+    my_list.append(val)
+    return my_list
